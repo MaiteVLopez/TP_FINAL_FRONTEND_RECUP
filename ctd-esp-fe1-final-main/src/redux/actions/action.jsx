@@ -24,3 +24,6 @@ export const buscarPersonajes = ( nombre ) => {
         nombre
     }
 }
+
+/*export type PersonajesActin =
+    | ReturnType<typeof buscarPersonajes>*/
