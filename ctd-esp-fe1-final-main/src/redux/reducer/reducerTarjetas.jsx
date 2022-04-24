@@ -18,14 +18,15 @@ import { Reducer } from "react";
 };
 
 //Typado
-//export const estadoFiltro:Reducer<EstadoPersonaje, any> = (state = estadoInicial, action):any
+//BusquedaPersonajeAccion es la interfaz del action
+//export const estadoFiltro:Reducer<EstadoPersonaje, BusquedaPersonajeAccion> = (state = estadoInicial, action):EstadoPersonaje
 
 const estadoFiltro = (state = estadoInicial, action) => {
     switch (action.type){
         case "BUSCAR_PERSONAJE":
             return{
                 ...state,
-                serch: action.name
+                serch: action.nombre
             }  
            // break;
         default:
