@@ -35,3 +35,13 @@ const estadoFiltro = (state = estadoInicial, action) => {
 } 
 
 export default estadoFiltro;
+
+/*
+//Thunk
+
+export const saveOrder = () => async (disoatch, getState) => {
+    // Obtiene los datos de la Store que serán enviados a la API
+
+    const order = getState().
+}
+*/

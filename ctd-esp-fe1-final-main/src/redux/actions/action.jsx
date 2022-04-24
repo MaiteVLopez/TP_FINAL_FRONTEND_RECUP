@@ -18,10 +18,10 @@ export const buscarPersonajes:ActionCreator<BusquedaPersonajeAccion> =
  */
 
 
-export const buscarPersonajes = ( nombre ) => {
+export const buscarPersonajes = ( nombreEnElFiltro ) => {
     return {
         type: "BUSCAR_PERSONAJE",
-        nombre
+        nombreEnElFiltro
     }
 }
 
