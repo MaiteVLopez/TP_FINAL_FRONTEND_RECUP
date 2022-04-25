@@ -1,7 +1,8 @@
 //import { configureStore } from "@reduxjs/toolkit";
 import {createStore, applyMiddleware} from '@reduxjs/toolkit';
 import {combineReducers} from 'redux';
-import { buscarPersonajes } from '../actions/action';
+import { PersonajesAction } from '../actions/actionPersonajes';
+//import { buscarPersonajes } from '../actions/actionPersonajes';
 import estadoFiltro from '../reducer/reducerTarjetas';
 import thunk from 'redux-thunk';
 //devTools de redux:
