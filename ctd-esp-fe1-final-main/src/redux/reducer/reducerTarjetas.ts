@@ -6,16 +6,15 @@ import { PersonajesAction } from "../actions/actionPersonajes";
 export interface EstadoPersonaje {
     busqueda:string;
     arrayTarjetasPersonajes: typeof TarjetaPersonaje[];
+    estado: "CARGANDO"|"COMPLETO"|"COMPLETO_CON_ERROR",
     error: string | null;
-  
 }
-
-
 
  const estadoInicial: EstadoPersonaje = {
     busqueda: '',
     arrayTarjetasPersonajes: [],
-    error: 'Hay un error' 
+    estado: "COMPLETO",
+    error: null
 }
 /*
  const estadoInicial = {
@@ -32,9 +31,25 @@ export const estadoFiltro:Reducer<EstadoPersonaje,PersonajesAction> = (state = e
         case "BUSCAR_PERSONAJE":
             return{
                 ...state,
-                busqueda: action.nombreEnElFiltro
+                busqueda: action.nombreEnElFiltro,
+                estado: "CARGANDO",
+                //para que se borre el error cuando cargo bn
+                error: null,
             }  
            // break;
+        case "BUSCAR_PERSONAJE_EXITO":
+            return{
+                ...state,
+                estado: "COMPLETO",
+                arrayTarjetasPersonajes: action.arrayTarjetasPersonajes,
+            }
+        case "BUSCAR_PERSONAJE_ERROR":
+            return{
+                ...state,
+                estado: "COMPLETO_CON_ERROR",
+                arrayTarjetasPersonajes: [],
+                error: action.error
+            }
         default:
             return state;
     }
