@@ -1,6 +1,7 @@
 import { Action, ActionCreator, ThunkAction } from "@reduxjs/toolkit";
 import TarjetaPersonaje from "../../componentes/personajes/tarjeta-personaje.componente";
 import { buscarPersonajesAPI } from "../../servicios/personajesServicios";
+import Personaje from "../../tyoes/personaje";
 import { IRootState } from "../store/store";
 
 // typado
@@ -13,7 +14,7 @@ nombreEnElFiltro: string
 export interface BusquedaPersonajeExitoAccion extends Action {
 type: "BUSCAR_PERSONAJE_EXITO";
 //se evuelven tarjetas con los personajes
-arrayTarjetasPersonajes: typeof TarjetaPersonaje[]
+arrayPersonajes: Personaje[]
 }
 //accion para cuando la llamada asinc se ejecute con error
 export interface BusquedaPersonajeErrorAccion extends Action {
@@ -35,10 +36,10 @@ export const buscarPersonajes:ActionCreator<BusquedaPersonajeAccion> =
 } 
 
 export const buscarPersonajesExito:ActionCreator<BusquedaPersonajeExitoAccion> = 
-    (personajes: typeof TarjetaPersonaje[]) => {
+    (personajes: Personaje[]) => {
     return {
         type: "BUSCAR_PERSONAJE_EXITO",
-        arrayTarjetasPersonajes: personajes
+        arrayPersonajes: personajes
     }
 } 
 
@@ -53,7 +54,7 @@ export const buscarPersonasjeError:ActionCreator<BusquedaPersonajeErrorAccion> =
 //BUSCAR_SOLO_SI_HAY_MAS_DE_TRES_CARAACTERES
 
 const MINIMOS_CARACETERS_BUSQUEDA = 3;
-export const buscarPersonajeThonk = (nombreEnElFiltro: string) : BuscarPersonajesThunkAction => {
+export const buscarPersonajesThunk = (nombreEnElFiltro: string) : BuscarPersonajesThunkAction => {
     return async (distpach, getState) => {
         //Que inicie la busqueda si hay tres letras en el filtro
         if(nombreEnElFiltro.length < MINIMOS_CARACETERS_BUSQUEDA ) return null;

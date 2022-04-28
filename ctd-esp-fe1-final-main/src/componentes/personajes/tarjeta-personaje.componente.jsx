@@ -9,8 +9,16 @@ import './tarjeta-personaje.css';
  * 
  * @returns un JSX element 
  */
-const TarjetaPersonaje = () => {
+const TarjetaPersonaje = (props) => {
 
+    return <div className="tarjeta-personaje">
+        <img src={props.img} alt={props.name}/>
+        <div className="tarjeta-personaje-body">
+            <span>{props.name}</span>
+            <BotonFavorito esFavorito={false} />
+        </div>
+    </div>
+    /*
     return <div className="tarjeta-personaje">
         <img src="https://rickandmortyapi.com/api/character/avatar/1.jpeg" alt="Rick Sanchez"/>
         <div className="tarjeta-personaje-body">
@@ -18,6 +26,7 @@ const TarjetaPersonaje = () => {
             <BotonFavorito esFavorito={false} />
         </div>
     </div>
+    */
 }
 
 export default TarjetaPersonaje;

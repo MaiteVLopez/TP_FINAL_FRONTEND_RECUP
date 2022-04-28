@@ -12,7 +12,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 
 //Mis Reducers 
 const reducers = combineReducers({
-    estadoFiltro: estadoFiltro,
+    personajes: estadoFiltro,
     //otroREducer
 })
 
