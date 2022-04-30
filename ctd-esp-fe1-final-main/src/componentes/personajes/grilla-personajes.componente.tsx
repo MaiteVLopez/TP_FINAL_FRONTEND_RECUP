@@ -1,4 +1,5 @@
-import { TypedUseSelectorHook, useSelector as useReduxSelector } from 'react-redux';
+
+//import { TypedUseSelectorHook, useSelector as useReduxSelector } from 'react-redux';
 import estadoFiltro, { EstadoPersonaje } from '../../redux/reducer/reducerTarjetas';
 import './grilla-personajes.css';
 import TarjetaPersonaje from './tarjeta-personaje.componente';
@@ -6,6 +7,7 @@ import { IRootState } from '../../redux/store/store';
 import TarjetaEpisodio from '../episodios/tarjeta-episodio.componente';
 import Personaje from '../../tyoes/personaje';
 import { FC } from 'react';
+import { useSelector } from "../../redux/store/store"
 /**
  * Grilla de personajes para la pagina de inicio
  * 
@@ -15,7 +17,7 @@ import { FC } from 'react';
  * @returns un JSX element 
  */
 
- export const useSelector: TypedUseSelectorHook<IRootState> = useReduxSelector;
+ //export const useSelector: TypedUseSelectorHook<IRootState> = useReduxSelector;
 
 const GrillaPersonajes : FC = () => {
 
@@ -23,12 +25,12 @@ const GrillaPersonajes : FC = () => {
 
     if(estado === "CARGANDO") return <div>Cargando Tarjeta Personaje...</div>
     if(!busqueda || busqueda.length === 0 ) return <></>
-
     return <div className="grilla-personajes">
         {
+            
             arrayPersonajes.map((personaje:Personaje) => {
                 return (
-                    <div key={"personaje" + personaje.name}>
+                    <div key={"personaje" + personaje.id}>
                         <TarjetaPersonaje   img={personaje.image}
                                             name ={personaje.name}
                                             

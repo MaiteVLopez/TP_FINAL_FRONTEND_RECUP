@@ -1,4 +1,5 @@
 import GrillaPersonajes from "../componentes/personajes/grilla-personajes.componente";
+import TarjetaPersonaje from "../componentes/personajes/tarjeta-personaje.componente";
 
 /**
  * Esta es la pagina de favoritos. Aquí se deberan ver todos los personajes marcados como favoritos
@@ -14,7 +15,7 @@ const PaginaFavoritos = () => {
             <h3>Personajes Favoritos</h3>
             <button className="danger">Test Button</button>
         </div>
-        <GrillaPersonajes />
+        
     </div>
 }
 

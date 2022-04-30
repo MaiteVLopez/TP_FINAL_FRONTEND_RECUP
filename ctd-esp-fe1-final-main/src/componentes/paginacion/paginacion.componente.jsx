@@ -1,19 +1,50 @@
 import './paginacion.css';
+import { buscarPersonajesThunk } from '../../redux/actions/actionPersonajes';
+import { useDispatch } from 'react-redux';
+import { useSelector } from "../../redux/store/store"
+import estadoFiltro, { EstadoPersonaje } from '../../redux/reducer/reducerTarjetas';
 
-/**
- * Componente que contiene los botones para paginar
- * 
- * Deberás agregar las propiedades necesarias para que funcione correctamente
- * 
- * 
- * @returns un JSX element 
- */
+
+
+let contador = 1;
 const Paginacion = () => {
+    
 
-    return <div className="paginacion">
-        <button disabled={true} className={"primary"}>Anterior</button>
-        <button disabled={false} className={"primary"}>Siguiente</button>
+    //const {busqueda} = useSelector<EstadoPersonaje>(state => state.personajes)
+  
+    //const {arrayPersonajes,estado, busqueda} = useSelector(state => state.personajes)
+    const dispatch = useDispatch();
+    const onClickAnterior = () => {
+        contador= contador - 1;
+        dispatch(buscarPersonajesThunk(busqueda,contador))
+        console.log("contador evento anterior"+contador);
+    }   
+    const {arrayPersonajes,estado, busqueda} = useSelector(state => state.personajes)
+    console.log("busqueda: "+busqueda);
+    const onClickSiguiente = () => {
+        contador = contador + 1; 
+        dispatch(buscarPersonajesThunk(busqueda,contador))
+        console.log("contador evento siguiente"+contador);
+    }
+
+
+return <div className="paginacion">
+        <button disabled={false} className={"primary"}
+        onClick={() => onClickAnterior()}>Anterior</button>
+        <button disabled={false} className={"primary"}
+        onClick={() => onClickSiguiente()}>Siguiente</button>
     </div>
 }
 
 export default Paginacion;
+
+
+
+/**
+ * 
+ * onClick={(e)=>
+                                                                    {e.preventDefault();
+                                                                    //buscarPersonajesThunk(busqueda,3+1);              
+                                                                    }}
+ * 
+ */

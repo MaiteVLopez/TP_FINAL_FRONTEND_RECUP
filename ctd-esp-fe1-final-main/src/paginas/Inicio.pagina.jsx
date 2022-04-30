@@ -19,7 +19,7 @@ const PaginaInicio = () => {
         <Filtros />
         <Paginacion />
         <GrillaPersonajes />
-        <Paginacion />
+       
     </div>
 }
 

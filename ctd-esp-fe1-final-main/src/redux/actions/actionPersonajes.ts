@@ -54,7 +54,7 @@ export const buscarPersonasjeError:ActionCreator<BusquedaPersonajeErrorAccion> =
 //BUSCAR_SOLO_SI_HAY_MAS_DE_TRES_CARAACTERES
 
 const MINIMOS_CARACETERS_BUSQUEDA = 3;
-export const buscarPersonajesThunk = (nombreEnElFiltro: string) : BuscarPersonajesThunkAction => {
+export const buscarPersonajesThunk = (nombreEnElFiltro: string, page: number) : BuscarPersonajesThunkAction => {
     return async (distpach, getState) => {
         //Que inicie la busqueda si hay tres letras en el filtro
         if(nombreEnElFiltro.length < MINIMOS_CARACETERS_BUSQUEDA ) return null;
@@ -64,7 +64,7 @@ export const buscarPersonajesThunk = (nombreEnElFiltro: string) : BuscarPersonaj
         distpach(buscarPersonajes(nombreEnElFiltro));
         try{
             //buscarPersonajesAPI es la funcion definida en los servicios, que hace el fetch y tiene los datos de backend
-            const arrayPersonajes = await buscarPersonajesAPI(nombreEnElFiltro);
+            const arrayPersonajes = await buscarPersonajesAPI(nombreEnElFiltro, page);
             distpach(buscarPersonajesExito(arrayPersonajes));
         }catch(e){
             distpach(buscarPersonasjeError(e))
