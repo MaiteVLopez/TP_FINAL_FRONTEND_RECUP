@@ -2,7 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import './App.css';
 import PaginaInicio from "./paginas/Inicio.pagina";
 import PaginaFavoritos from "./paginas/Favoritos.pagina";
-import PaginaDetalle from "./paginas/Detalle.pagina";
+import PaginaDetalle from "./paginas/Detalle.pagina.tsx";
 import Encabezado from "./componentes/layout/encabezado.componente";
 import { Provider } from "react-redux";
 import { store } from "./redux/store/store";

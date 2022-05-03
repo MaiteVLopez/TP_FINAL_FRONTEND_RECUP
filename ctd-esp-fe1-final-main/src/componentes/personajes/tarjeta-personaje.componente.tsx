@@ -14,19 +14,22 @@ import { EstadoPersonaje } from '../../redux/reducer/reducerTarjetas';
  const TarjetaPersonaje  = (props:any) => 
  {
  const navigate = useNavigate();
- const handleDetalle = (id:number) => 
+ const handleDetalle = (index:number) => 
     {
-    navigate('/detalle',  { state: { id:id }} );
+    navigate('/detalle');
+    const indexStorage = index
+    localStorage.setItem('index', JSON.stringify(indexStorage))
     }
 
     const {arrayPersonajes,estado, busqueda, error} = useSelector<EstadoPersonaje>(state => state.personajes)
+    
     //console.log("props ",props.id)
     //console.log("array personaje ",arrayPersonajes[props.id])
     console.log("array personaje ",arrayPersonajes)
     return <div className="tarjeta-personaje">
         <img src={arrayPersonajes[props.index].image} 
                                     alt={props.name}
-                                    onClick={() => handleDetalle(arrayPersonajes[props.index].id)}/> 
+                                    onClick={() => handleDetalle(props.index)}/> 
         <div className="tarjeta-personaje-body">
             <span>{props.name}</span>
    

@@ -8,10 +8,10 @@ import './tarjeta-episodio.css';
  * 
  * @returns un JSX element 
  */
-const TarjetaEpisodio = () => {
+const TarjetaEpisodio = (props) => {
 
     return <div className="tarjeta-episodio">
-            <h4>Nombre del Episodio</h4>
+            <h4>{props.name}</h4>
             <div>
                 <span>Temporada nro Episodio Nro</span>
                 <span>URL del Episodio</span>
