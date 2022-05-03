@@ -1,5 +1,5 @@
 import { Reducer } from "react";
-import Personaje from "../../tyoes/personaje";
+import Personaje from "../../types/personaje";
 import { PersonajesAction } from "../actions/actionPersonajes";
 
 //typado 
@@ -41,7 +41,7 @@ export const estadoFiltro:Reducer<EstadoPersonaje,PersonajesAction> = (state= es
             return{
                 ...state,
                 estado: "COMPLETO",
-                arrayPersonajes: action.arrayPersonajes,
+                arrayPersonajes: action.arrayPersonajes
             }
         case "BUSCAR_PERSONAJE_ERROR":
             return{

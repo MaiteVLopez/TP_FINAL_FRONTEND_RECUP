@@ -1,5 +1,4 @@
-import TarjetaPersonaje from "../componentes/personajes/tarjeta-personaje.componente";
-import Personaje from "../types/personaje";
+import Paginacion from "../componentes/paginacion/paginacion.componente";
 interface Info {
     count:number,
     pages:number,
@@ -31,12 +30,7 @@ function handleErrors(response?:any){
     return response;
 }
 
-export const buscarPersonajesAPI = async (nombre?: string): Promise<dataObject> =>{
-
-        let params = `?`
-        if(nombre){
-            params += `&name=${nombre}`
-        }
+export const buscarPersonajesAPIPaginacion = async (params?: string): Promise<dataObject> =>{
 return fetch(`https://rickandmortyapi.com/api/character/${params}`)
    .then(handleErrors)
     .then(data => data.json())

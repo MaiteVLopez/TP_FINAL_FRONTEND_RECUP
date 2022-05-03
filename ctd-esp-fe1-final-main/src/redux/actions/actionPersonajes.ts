@@ -1,9 +1,14 @@
 import { Action, ActionCreator, ThunkAction } from "@reduxjs/toolkit";
-import TarjetaPersonaje from "../../componentes/personajes/tarjeta-personaje.componente";
 import { buscarPersonajesAPI } from "../../servicios/personajesServicios";
-import Personaje from "../../tyoes/personaje";
+import Personaje from "../../types/personaje";
 import { IRootState } from "../store/store";
 
+interface Info {
+    count:number,
+    pages:number,
+    next:string,
+    prev:string
+}
 // typado
 export interface BusquedaPersonajeAccion extends  Action {
 type: "BUSCAR_PERSONAJE";
@@ -14,7 +19,8 @@ nombreEnElFiltro: string
 export interface BusquedaPersonajeExitoAccion extends Action {
 type: "BUSCAR_PERSONAJE_EXITO";
 //se evuelven tarjetas con los personajes
-arrayPersonajes: Personaje[]
+arrayPersonajes: Personaje[],
+info: Info
 }
 //accion para cuando la llamada asinc se ejecute con error
 export interface BusquedaPersonajeErrorAccion extends Action {
@@ -31,15 +37,16 @@ export const buscarPersonajes:ActionCreator<BusquedaPersonajeAccion> =
     (nombreEnElFiltro: string) => {
     return {
         type: "BUSCAR_PERSONAJE",
-        nombreEnElFiltro
+        nombreEnElFiltro,
     }
 } 
 
 export const buscarPersonajesExito:ActionCreator<BusquedaPersonajeExitoAccion> = 
-    (personajes: Personaje[]) => {
+    (personajes: Personaje[], info: Info) => {
     return {
         type: "BUSCAR_PERSONAJE_EXITO",
-        arrayPersonajes: personajes
+        arrayPersonajes: personajes,
+        info: info
     }
 } 
 
@@ -54,7 +61,7 @@ export const buscarPersonasjeError:ActionCreator<BusquedaPersonajeErrorAccion> =
 //BUSCAR_SOLO_SI_HAY_MAS_DE_TRES_CARAACTERES
 
 const MINIMOS_CARACETERS_BUSQUEDA = 3;
-export const buscarPersonajesThunk = (nombreEnElFiltro: string, page: number) : BuscarPersonajesThunkAction => {
+export const buscarPersonajesThunk = (nombreEnElFiltro: string) : BuscarPersonajesThunkAction => {
     return async (distpach, getState) => {
         //Que inicie la busqueda si hay tres letras en el filtro
         if(nombreEnElFiltro.length < MINIMOS_CARACETERS_BUSQUEDA ) return null;
@@ -64,8 +71,12 @@ export const buscarPersonajesThunk = (nombreEnElFiltro: string, page: number) : 
         distpach(buscarPersonajes(nombreEnElFiltro));
         try{
             //buscarPersonajesAPI es la funcion definida en los servicios, que hace el fetch y tiene los datos de backend
-            const arrayPersonajes = await buscarPersonajesAPI(nombreEnElFiltro, page);
-            distpach(buscarPersonajesExito(arrayPersonajes));
+            //const arrayPersonajes = await buscarPersonajesAPI(nombreEnElFiltro,page); 
+            const data = await buscarPersonajesAPI(nombreEnElFiltro);
+            distpach(buscarPersonajesExito(data.results, data.info));
+            //console.log("info",data.info);
+            //console.log("results",data.results);
+            //console.log("data", data);
         }catch(e){
             distpach(buscarPersonasjeError(e))
         }

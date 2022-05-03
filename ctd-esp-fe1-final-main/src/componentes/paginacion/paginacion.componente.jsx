@@ -8,30 +8,41 @@ import estadoFiltro, { EstadoPersonaje } from '../../redux/reducer/reducerTarjet
 
 let contador = 1;
 const Paginacion = () => {
-    
-
+    let disabledNext = false;
+    let disabledPrev = false;
+    if(contador <= 1)
+    {
+        disabledPrev = true;
+    }
     //const {busqueda} = useSelector<EstadoPersonaje>(state => state.personajes)
   
     //const {arrayPersonajes,estado, busqueda} = useSelector(state => state.personajes)
-    const dispatch = useDispatch();
+   // const dispatch = useDispatch();
+    const {arrayPersonajes,estado, busqueda,info} = useSelector(state => state.personajes)
+   /*
+    if(arrayPersonajes.lenght == 0)
+        {
+            disabledNext = true;
+        }
+    */
+    
+    console.log("info"+info);
     const onClickAnterior = () => {
+        
         contador= contador - 1;
-        dispatch(buscarPersonajesThunk(busqueda,contador))
-        console.log("contador evento anterior"+contador);
+        
+        //dispatch(buscarPersonajesThunk(busqueda,contador))
     }   
-    const {arrayPersonajes,estado, busqueda} = useSelector(state => state.personajes)
-    console.log("busqueda: "+busqueda);
     const onClickSiguiente = () => {
         contador = contador + 1; 
-        dispatch(buscarPersonajesThunk(busqueda,contador))
-        console.log("contador evento siguiente"+contador);
+     //   dispatch(buscarPersonajesThunk(busqueda,contador))
     }
 
 
 return <div className="paginacion">
-        <button disabled={false} className={"primary"}
+        <button disabled={disabledPrev} className={"primary"}
         onClick={() => onClickAnterior()}>Anterior</button>
-        <button disabled={false} className={"primary"}
+        <button disabled={disabledNext} className={"primary"}
         onClick={() => onClickSiguiente()}>Siguiente</button>
     </div>
 }
