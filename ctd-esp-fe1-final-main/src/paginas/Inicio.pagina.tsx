@@ -22,7 +22,6 @@ const dispatch = useDispatch();
  const {arrayPersonajes,estado, busqueda, error} = useSelector<EstadoPersonaje>(state => state.personajes);
  const handleClick = (e:any) => 
   {
-      console.log("entro aca tmb")
    dispatch(buscarPersonajesThunk(""))  
   }
  

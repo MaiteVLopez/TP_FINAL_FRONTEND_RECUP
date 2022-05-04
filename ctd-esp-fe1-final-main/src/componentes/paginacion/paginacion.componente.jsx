@@ -26,7 +26,7 @@ const Paginacion = () => {
         }
     */
     
-    console.log("info"+info);
+
     const onClickAnterior = () => {
         
         contador= contador - 1;

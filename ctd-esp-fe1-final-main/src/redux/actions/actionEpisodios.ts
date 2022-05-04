@@ -91,18 +91,6 @@ export const buscarEpisodiosThunk = (numerosEpisodios: string[]) : BuscarEpisodi
                 const arrayEpisodios = await buscarEpisodiosAPI(numerosEpisodios);
                  distpach(buscarEpisodiosExito(arrayEpisodios));
             }
-           /* if(arrayEpisodios.length)
-            {
-                distpach(buscarEpisodiosExito(arrayEpisodios));    
-            }
-            else
-            {
-                const objetoEpisodio:any = await buscarEpisodiosAPI(numerosEpisodios);
-                distpach(buscarEpisodiosExito(objetoEpisodio));
-            }*/
-            //const arrayDistpach = arrayEpisodios[0]
-           //console.log("arrayEpisodios", arrayEpisodios.length)
-            
         }catch(e){
             distpach(buscarEpisodiosError(e))
         }

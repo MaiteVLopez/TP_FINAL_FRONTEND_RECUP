@@ -74,9 +74,6 @@ export const buscarPersonajesThunk = (nombreEnElFiltro: string) : BuscarPersonaj
             //const arrayPersonajes = await buscarPersonajesAPI(nombreEnElFiltro,page); 
             const data = await buscarPersonajesAPI(nombreEnElFiltro);
             distpach(buscarPersonajesExito(data.results, data.info));
-            //console.log("info",data.info);
-            //console.log("results",data.results);
-            //console.log("data", data);
         }catch(e){
             distpach(buscarPersonasjeError(e))
         }

@@ -9,11 +9,13 @@ import { TypedUseSelectorHook, useSelector as useReduxSelector } from 'react-red
 //devTools de redux:
 import { composeWithDevTools } from 'redux-devtools-extension';
 import episodiosPersonajes from '../reducer/reducerEpisodios';
+import marcarDesmarcarFavoritos from '../reducer/reducerFavoritos';
 
 //Mis Reducers 
 const reducers = combineReducers({
     personajes: estadoFiltro,
-    episodios: episodiosPersonajes
+    episodios: episodiosPersonajes,
+    favoritos: marcarDesmarcarFavoritos
 })
 
 //Estado con el que va a trabajar el action thonk
