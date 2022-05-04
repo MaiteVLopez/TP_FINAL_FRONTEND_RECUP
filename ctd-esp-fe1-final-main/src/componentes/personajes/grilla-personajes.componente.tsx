@@ -1,5 +1,5 @@
 
-import estadoFiltro, { EstadoPersonaje } from '../../redux/reducer/reducerTarjetas';
+import estadoFiltro, { EstadoPersonaje } from '../../redux/reducer/reducerPersonajes';
 import './grilla-personajes.css';
 import TarjetaPersonaje from './tarjeta-personaje.componente';
 import Personaje from '../../types/personaje';
@@ -23,13 +23,11 @@ const GrillaPersonajes : FC = () => {
     if(estado === "CARGANDO") return <div>Cargando Tarjeta Personaje...</div>
     if(estado === "COMPLETO_CON_ERROR") return <>Ocurrio un error: {error}</>
     if(!busqueda || busqueda.length === 0 ) return <></>
-    console.log("ARRAY EN LA GRILLA"+arrayPersonajes)
+  
 
 
 return <div className="grilla-personajes">
-        {
-            
-            arrayPersonajes?.map((personaje:Personaje, index:number) => {
+        {arrayPersonajes?.map((personaje:Personaje, index:number) => {
                 return (
                     <div key={"personaje" + personaje.id}>
                         <TarjetaPersonaje   img={personaje.image}
@@ -39,8 +37,7 @@ return <div className="grilla-personajes">
                          />
                     </div>
                 )
-            })
-        }
+            })}
     </div>
     
 

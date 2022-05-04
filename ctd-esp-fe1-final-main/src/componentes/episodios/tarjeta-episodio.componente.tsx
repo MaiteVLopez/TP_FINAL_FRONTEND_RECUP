@@ -8,14 +8,13 @@ import './tarjeta-episodio.css';
  * 
  * @returns un JSX element 
  */
-const TarjetaEpisodio = (props) => {
-
+const TarjetaEpisodio = (props:any) => {
     return <div className="tarjeta-episodio">
-            <h4>{props.name}</h4>
+            <h4>{props.nombre}</h4>
             <div>
-                <span>Temporada nro Episodio Nro</span>
-                <span>URL del Episodio</span>
-                <span>Fecha de Lanzamieto</span>
+                <span>{props.episodio}</span>
+                <span>{props.url}</span>
+                <span>{props.lanzamiento}</span>
             </div>
     </div>
 }

@@ -3,17 +3,17 @@ import { applyMiddleware} from '@reduxjs/toolkit';
 import {combineReducers, createStore} from 'redux';
 import { PersonajesAction } from '../actions/actionPersonajes';
 //import { buscarPersonajes } from '../actions/actionPersonajes';
-import estadoFiltro from '../reducer/reducerTarjetas';
+import estadoFiltro from '../reducer/reducerPersonajes';
 import thunk from 'redux-thunk';
 import { TypedUseSelectorHook, useSelector as useReduxSelector } from 'react-redux';
 //devTools de redux:
 import { composeWithDevTools } from 'redux-devtools-extension';
-//import { estadoFiltro } from "../reducer/reducerTarjetas";
+import episodiosPersonajes from '../reducer/reducerEpisodios';
 
 //Mis Reducers 
 const reducers = combineReducers({
     personajes: estadoFiltro,
-    //otroREducer
+    episodios: episodiosPersonajes
 })
 
 //Estado con el que va a trabajar el action thonk

@@ -2,7 +2,7 @@ import './paginacion.css';
 import { buscarPersonajesThunk } from '../../redux/actions/actionPersonajes';
 import { useDispatch } from 'react-redux';
 import { useSelector } from "../../redux/store/store"
-import estadoFiltro, { EstadoPersonaje } from '../../redux/reducer/reducerTarjetas';
+import estadoFiltro, { EstadoPersonaje } from '../../redux/reducer/reducerPersonajes';
 
 
 

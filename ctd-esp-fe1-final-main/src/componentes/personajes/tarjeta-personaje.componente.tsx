@@ -1,8 +1,10 @@
 import { Link, useNavigate } from 'react-router-dom';
 import BotonFavorito from '../botones/boton-favorito.componente';
+import { useDispatch } from 'react-redux';
 import './tarjeta-personaje.css';
 import { useSelector } from "../../redux/store/store"
-import { EstadoPersonaje } from '../../redux/reducer/reducerTarjetas';
+import { EstadoPersonaje } from '../../redux/reducer/reducerPersonajes';
+import { buscarEpisodiosThunk } from '../../redux/actions/actionEpisodios';
 /**
  * Tarjeta para cada personaje dentro de la grilla de personajes. 
  * 
@@ -14,22 +16,29 @@ import { EstadoPersonaje } from '../../redux/reducer/reducerTarjetas';
  const TarjetaPersonaje  = (props:any) => 
  {
  const navigate = useNavigate();
- const handleDetalle = (index:number) => 
+ const dispatch = useDispatch();
+ const {arrayPersonajes,estado, busqueda, error} = useSelector<EstadoPersonaje>(state => state.personajes);
+
+ const handleFiltroEpisodios = () :string[]=>
+    {
+    const episodios: string[] = arrayPersonajes[props.index].episode;
+    let arrayEpisodios : string[] = []
+    const strParaCortar = 'https://rickandmortyapi.com/api/episode/';
+    episodios?.map((episodio:string) => arrayEpisodios.push(episodio.substr(strParaCortar.length)))
+    return arrayEpisodios;
+    }
+
+ const handleDetalle = (index:number,e:any) => 
     {
     navigate('/detalle');
     const indexStorage = index
     localStorage.setItem('index', JSON.stringify(indexStorage))
+    dispatch(buscarEpisodiosThunk(handleFiltroEpisodios()))
     }
-
-    const {arrayPersonajes,estado, busqueda, error} = useSelector<EstadoPersonaje>(state => state.personajes)
-    
-    //console.log("props ",props.id)
-    //console.log("array personaje ",arrayPersonajes[props.id])
-    console.log("array personaje ",arrayPersonajes)
     return <div className="tarjeta-personaje">
         <img src={arrayPersonajes[props.index].image} 
                                     alt={props.name}
-                                    onClick={() => handleDetalle(props.index)}/> 
+                                    onClick={(e) => handleDetalle(props.index,e)}/> 
         <div className="tarjeta-personaje-body">
             <span>{props.name}</span>
    
