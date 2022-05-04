@@ -1,15 +1,18 @@
 import { Reducer } from "react";
+import Personaje from "../../types/personaje";
 import { FavoritosAction } from "../actions/actionFavoritos";
 
 //typado 
 export interface FavoritoMarcado {
     marcado: boolean,
+    arrayFavoritos: Personaje[],
     estadoFavorito: "MARCADO_CORRECTO"|"MARCADO_ERROR",
     errorFavorito: string | null
 }
 
  const estadoInicial: FavoritoMarcado = {
     marcado: false,
+    arrayFavoritos: [],
     estadoFavorito: "MARCADO_CORRECTO",
     errorFavorito: null
 }
@@ -25,6 +28,7 @@ export const marcarDesmarcarFavoritos:Reducer<FavoritoMarcado,FavoritosAction> =
             return{
                 ...state,
                 marcado: action.marcado,
+                arrayFavoritos: action.arrayFavoritos,
                 estadoFavorito: "MARCADO_CORRECTO",
                 errorFavorito: null,
             }  
@@ -32,6 +36,7 @@ export const marcarDesmarcarFavoritos:Reducer<FavoritoMarcado,FavoritosAction> =
             return{
                 ...state,
                 marcado: action.marcado,
+                arrayFavoritos: action.arrayFavoritos,
                 estadoFavorito: "MARCADO_CORRECTO"
             }
         case "MARCAR_DESMARCAR_ERROR":

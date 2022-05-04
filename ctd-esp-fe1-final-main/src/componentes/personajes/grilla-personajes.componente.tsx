@@ -30,7 +30,7 @@ return <div className="grilla-personajes">
         {arrayPersonajes?.map((personaje:Personaje, index:number) => {
                 return (
                     <div key={"personaje" + personaje.id}>
-                        <TarjetaPersonaje   img={personaje.image}
+                        <TarjetaPersonaje   
                                             name ={personaje.name}
                                             index={index}
                                            
