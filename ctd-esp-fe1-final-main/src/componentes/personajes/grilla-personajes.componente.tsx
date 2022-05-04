@@ -19,20 +19,33 @@ import { useSelector } from "../../redux/store/store"
 const GrillaPersonajes : FC = () => {
 
     const {arrayPersonajes,estado, busqueda, error} = useSelector<EstadoPersonaje>(state => state.personajes)
-
+    let arrayPersonajesActualizados: Personaje[] = arrayPersonajes
     if(estado === "CARGANDO") return <div>Cargando Tarjeta Personaje...</div>
     if(estado === "COMPLETO_CON_ERROR") return <>Ocurrio un error: {error}</>
     if(!busqueda || busqueda.length === 0 ) return <></>
   
+    const stringStorage:string|null = localStorage.getItem('arrayPersonaje');
+    let strFavorito:string = "";
+    if(stringStorage)
+    {
+        strFavorito = stringStorage;
+    }  
+    if(strFavorito)
+    {
+        arrayPersonajesActualizados = JSON.parse(strFavorito);
+    }
+    //console.log("array actualizado", arrayPersonajesActualizados)
+     
 
 
 return <div className="grilla-personajes">
-        {arrayPersonajes?.map((personaje:Personaje, index:number) => {
+        {arrayPersonajesActualizados?.map((personaje:Personaje, index:number) => {
                 return (
                     <div key={"personaje" + personaje.id}>
                         <TarjetaPersonaje   
                                             name ={personaje.name}
                                             index={index}
+                                            personajeFavorito={false}
                                            
                                             
                          />

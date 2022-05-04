@@ -13,7 +13,8 @@ import Personaje from "../../types/personaje";
 
 interface propsTarjetaPersonaje{
   name:string,
-  index:number
+  index:number,
+  personajeFavorito: boolean
 }
 
 /**
@@ -25,7 +26,8 @@ interface propsTarjetaPersonaje{
  * @param {number} index
  * @returns {JSX.Element}
  */
-const TarjetaPersonaje = ({name,index}: propsTarjetaPersonaje): JSX.Element => {
+const TarjetaPersonaje = ({name,index,personajeFavorito}: propsTarjetaPersonaje): JSX.Element => {
+  
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { arrayPersonajes, estado, busqueda, error } =
@@ -48,7 +50,9 @@ const TarjetaPersonaje = ({name,index}: propsTarjetaPersonaje): JSX.Element => {
     localStorage.setItem("index", JSON.stringify(indexStorage));
     dispatch(buscarEpisodiosThunk(handleFiltroEpisodios()));
   };
- 
+  const handlePersistenciaArrayPersonajes = () => {
+    localStorage.setItem("arrayPersonajes", JSON.stringify(arrayPersonajes));
+  };
 
   const handlePersistenciaFavorito = () => {
     localStorage.setItem("arrayFavoritos", JSON.stringify(arrayFavoritos));
@@ -71,26 +75,25 @@ const TarjetaPersonaje = ({name,index}: propsTarjetaPersonaje): JSX.Element => {
       dispatch(marcarFavoritosThunkAction(arrayFavoritos.length, arrayFavoritos));
     }
     handlePersistenciaFavorito();
+    handlePersistenciaArrayPersonajes();
   };
 
-  const handleActualizarFavorito = () => {
-    const stringStorage:string|null = localStorage.getItem('arrayFavoritos');
-    let strFavorito:string = "";
-    if(stringStorage)
-    {
-       strFavorito = stringStorage; 
-    }  
-    //arrayFavoritos = JSON.parse(strFavorito)
-   
-  }
- 
+
   return (
     <div className="tarjeta-personaje">
+      {personajeFavorito?
+      <img
+        src={arrayFavoritos[index].image}
+        alt={name}
+        onClick={(e) => handleDetalle(index, e)}
+      />
+      :
       <img
         src={arrayPersonajes[index].image}
         alt={name}
         onClick={(e) => handleDetalle(index, e)}
       />
+      }
       <div className="tarjeta-personaje-body">
         <span>{name}</span>
         <div>

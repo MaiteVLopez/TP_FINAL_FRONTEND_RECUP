@@ -18,7 +18,7 @@ const Encabezado = () => {
                 <nav>
                     <ul>
                         <li><Link to="/">Inicio</Link></li>
-                        <li><Link to="/favoritos">Favoritos</Link></li>
+                        <li><Link to="/favoritos" >Favoritos</Link></li>
                     </ul>
                 </nav>
             </div>
