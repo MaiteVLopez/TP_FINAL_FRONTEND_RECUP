@@ -7,7 +7,11 @@ import { EstadoPersonaje } from "../../redux/reducer/reducerPersonajes";
 import { buscarEpisodiosThunk } from "../../redux/actions/actionEpisodios";
 import { useEffect } from "react";
 import { FavoritoMarcado } from "../../redux/reducer/reducerFavoritos";
-import { desmarcarFavoritoAction, marcarFavoritosAction, marcarFavoritosThunkAction } from "../../redux/actions/actionFavoritos";
+import {
+  desmarcarFavoritoAction,
+  marcarFavoritosAction,
+  marcarFavoritosThunkAction,
+} from "../../redux/actions/actionFavoritos";
 import Personaje from "../../types/personaje";
 /**
  * Tarjeta para cada personaje dentro de la grilla de personajes.
@@ -17,12 +21,13 @@ import Personaje from "../../types/personaje";
  *
  * @returns un JSX element
  */
-const TarjetaPersonaje = (props:any) => {
+const TarjetaPersonaje = (props: any) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { arrayPersonajes, estado, busqueda, error } =
     useSelector<EstadoPersonaje>((state) => state.personajes);
-  const {marcado,estadoFavorito,errorFavorito} = useSelector<FavoritoMarcado>(state => state.favoritos);
+  const { marcado, estadoFavorito, errorFavorito } =
+    useSelector<FavoritoMarcado>((state) => state.favoritos);
   const handleFiltroEpisodios = (): string[] => {
     const episodios: string[] = arrayPersonajes[props.index].episode;
     let arrayEpisodios: string[] = [];
@@ -38,30 +43,15 @@ const TarjetaPersonaje = (props:any) => {
     localStorage.setItem("index", JSON.stringify(indexStorage));
     dispatch(buscarEpisodiosThunk(handleFiltroEpisodios()));
   };
-  let favorito:boolean = false;
-  const handleClick = () => { 
-   /*   if(favorito)
-        favorito = false;
-      else  
-        favorito = true;
-      console.log("fav del personaje",favorito)*/
-      if(marcado)
-      {
-        dispatch(marcarFavoritosThunkAction(1,marcado)) 
-          favorito = false
-         //src = "/imagenes/star.png"
-         
-      
-      }
-  else{
-    dispatch(marcarFavoritosThunkAction(3,marcado))  
-      favorito = true
-      //src = "/imagenes/star-filled.png"
-      
-      
-     
-  }
-    };
+  
+  const handleFavorito = () => {
+    if (marcado) {
+      dispatch(marcarFavoritosThunkAction(1, marcado));
+    } else {
+      dispatch(marcarFavoritosThunkAction(3, marcado));
+    }
+    arrayPersonajes[props.index].favorito = marcado;
+  };
 
   return (
     <div className="tarjeta-personaje">
@@ -72,13 +62,9 @@ const TarjetaPersonaje = (props:any) => {
       />
       <div className="tarjeta-personaje-body">
         <span>{props.name}</span>
-     
-          
-            <div>
-              <BotonFavorito esFavorito={favorito} onClick={() =>handleClick()} />
-            </div>
-      
-        
+        <div>
+          <BotonFavorito esFavorito={arrayPersonajes[props.index].favorito} onClick={() => handleFavorito()} />
+        </div>
       </div>
     </div>
   );

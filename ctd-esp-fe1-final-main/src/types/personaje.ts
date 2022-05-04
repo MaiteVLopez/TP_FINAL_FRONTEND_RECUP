@@ -13,7 +13,8 @@ interface Personaje {
     episode: string[],
     species: string,
     url:	string,
-    created:	string
+    created:	string,
+    favorito: boolean
 }
 
 export default Personaje;
