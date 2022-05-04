@@ -60,17 +60,17 @@ export const marcarFavoritosError: ActionCreator<MarcarFavoritoErrorAccion> = (
 };
 
 export const marcarFavoritosThunkAction = (
-  id: number,
-  marcado: boolean,
+  index: number,
   arrayFavoritos: Personaje[]
 ): FavoritosThunkAction => {
   return async (distpach, getState) => {
     try {
-      if (marcado) {
-        arrayFavoritos.splice(0,id)
+      if (arrayFavoritos[index].favorito) {
+        console.log("index",index)
+        arrayFavoritos.splice(index,1)
         distpach(desmarcarFavoritoAction(false,arrayFavoritos));
       } else {
-        
+        arrayFavoritos[index].favorito = true;
         distpach(marcarFavoritosAction(true,arrayFavoritos));
       }
       

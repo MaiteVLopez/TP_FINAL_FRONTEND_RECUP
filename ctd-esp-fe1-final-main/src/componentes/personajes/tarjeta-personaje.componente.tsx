@@ -30,7 +30,7 @@ const TarjetaPersonaje = ({name,index}: propsTarjetaPersonaje): JSX.Element => {
   const dispatch = useDispatch();
   const { arrayPersonajes, estado, busqueda, error } =
     useSelector<EstadoPersonaje>((state) => state.personajes);
-  const { marcado, estadoFavorito, errorFavorito,arrayFavoritos } =
+  const {marcado, estadoFavorito, errorFavorito,arrayFavoritos } =
     useSelector<FavoritoMarcado>((state) => state.favoritos);
   const handleFiltroEpisodios = (): string[] => {
     const episodios: string[] = arrayPersonajes[index].episode;
@@ -53,16 +53,23 @@ const TarjetaPersonaje = ({name,index}: propsTarjetaPersonaje): JSX.Element => {
   const handlePersistenciaFavorito = () => {
     localStorage.setItem("arrayFavoritos", JSON.stringify(arrayFavoritos));
   };
-  
-  const handleFavorito = () => {
-   // marcado = arrayPersonajes[index].favorito
-    if (marcado) {
-      dispatch(marcarFavoritosThunkAction(index, marcado, arrayFavoritos));
+  let indexFavorito:any = 0;
+  const handleFavorito = () => {  
+    if (arrayPersonajes[index].favorito) {
+      
+      arrayFavoritos.forEach((personaje,indexPersonaje)=>{
+        if(personaje.id === arrayPersonajes[index].id)
+        {
+          indexFavorito = indexPersonaje;
+        }
+      })
+      dispatch(marcarFavoritosThunkAction(indexFavorito, arrayFavoritos));
+      arrayPersonajes[index].favorito = false
     } else {
       arrayFavoritos.push(arrayPersonajes[index]);
-      dispatch(marcarFavoritosThunkAction(index, marcado, arrayFavoritos));
+      arrayPersonajes[index].favorito = true
+      dispatch(marcarFavoritosThunkAction(arrayFavoritos.length, arrayFavoritos));
     }
-    arrayPersonajes[index].favorito = marcado;
     handlePersistenciaFavorito();
   };
 
