@@ -84,14 +84,12 @@ export const buscarEpisodiosThunk = (numerosEpisodios: string[]) : BuscarEpisodi
             if(numerosEpisodios.length === 1)
                 {
                     const episodio: Episodio = await buscarEpisodioAPI(numerosEpisodios); 
-                    console.log("un episodio",episodio.name)
                     distpach(buscarEpisodioExito(episodio));       
                 }
             else
             {
                 const arrayEpisodios = await buscarEpisodiosAPI(numerosEpisodios);
-                console.log("resultados",arrayEpisodios)
-                distpach(buscarEpisodiosExito(arrayEpisodios));
+                 distpach(buscarEpisodiosExito(arrayEpisodios));
             }
            /* if(arrayEpisodios.length)
             {

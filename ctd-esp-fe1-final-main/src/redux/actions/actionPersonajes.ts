@@ -60,11 +60,11 @@ export const buscarPersonasjeError:ActionCreator<BusquedaPersonajeErrorAccion> =
 
 //BUSCAR_SOLO_SI_HAY_MAS_DE_TRES_CARAACTERES
 
-const MINIMOS_CARACETERS_BUSQUEDA = 3;
+//const MINIMOS_CARACETERS_BUSQUEDA = 3;
 export const buscarPersonajesThunk = (nombreEnElFiltro: string) : BuscarPersonajesThunkAction => {
     return async (distpach, getState) => {
         //Que inicie la busqueda si hay tres letras en el filtro
-        if(nombreEnElFiltro.length < MINIMOS_CARACETERS_BUSQUEDA ) return null;
+      //  if(nombreEnElFiltro.length < MINIMOS_CARACETERS_BUSQUEDA ) return null;
         //despachamos la action de buscar personajes, el ditpach busca personajes, 
         //va a lanzar la funcion que va derecho al reducer y va a marcar 
         //el estado como buscando y el valor de la busqueda por el nombrefiltro

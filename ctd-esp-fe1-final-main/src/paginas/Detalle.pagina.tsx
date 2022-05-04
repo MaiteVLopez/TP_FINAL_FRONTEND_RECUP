@@ -2,7 +2,6 @@ import "./Detalle.css";
 import BotonFavorito from "../componentes/botones/boton-favorito.componente";
 import TarjetaEpisodio from "../componentes/episodios/tarjeta-episodio.componente";
 import { useSelector } from "../redux/store/store"
-import { useNavigate } from "react-router-dom";
 import Episodio from "../types/episodio";
 import { EstadoPersonaje } from "../redux/reducer/reducerPersonajes";
 import { EpisodiosBuscados } from "../redux/reducer/reducerEpisodios";
@@ -22,25 +21,15 @@ import { FC } from "react";
  */
 
 const PaginaDetalle : FC = () => {
-    const navigate = useNavigate();
     const {arrayEpisodios, episodio} = useSelector<EpisodiosBuscados>((state):any => state.episodios)
     const {arrayPersonajes,estado, busqueda, error} = useSelector<EstadoPersonaje>(state => state.personajes)
     const index : string | null = localStorage.getItem('index');
     let indexInt : number = -1;
+   
     if(index)
     {
         indexInt = parseInt(index);
-    }
-    console.log("episodio detalle", episodio)
-    /*
-    if(arrayEpisodios.length > 0)
-        {
-        //si el array tiene un objeto
-        const tarjetaEpisodio : Episodio = arrayEpisodios[0]; 
-       
-        }*/
-       
-        
+    }  
     return <div className="container">
         <h3>{arrayPersonajes[indexInt].name}</h3>
         <div className={"detalle"}>
@@ -82,14 +71,4 @@ const PaginaDetalle : FC = () => {
 
 export default PaginaDetalle
 
-/**
- * <BotonFavorito esFavorito={false} />
  
-
-
- 
-         
-  
-
-
-*/

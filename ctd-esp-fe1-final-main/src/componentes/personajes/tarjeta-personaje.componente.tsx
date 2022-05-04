@@ -27,7 +27,7 @@ import { buscarEpisodiosThunk } from '../../redux/actions/actionEpisodios';
     episodios?.map((episodio:string) => arrayEpisodios.push(episodio.substr(strParaCortar.length)))
     return arrayEpisodios;
     }
-
+    let favorito = true;
  const handleDetalle = (index:number,e:any) => 
     {
     navigate('/detalle');
@@ -35,32 +35,29 @@ import { buscarEpisodiosThunk } from '../../redux/actions/actionEpisodios';
     localStorage.setItem('index', JSON.stringify(indexStorage))
     dispatch(buscarEpisodiosThunk(handleFiltroEpisodios()))
     }
+    const handleClick = (e:any) => 
+    {
+        console.log("entro aca")
+        if(favorito)
+             favorito=false;
+    
+        else
+             favorito=true;
+        return favorito
+    } 
     return <div className="tarjeta-personaje">
         <img src={arrayPersonajes[props.index].image} 
                                     alt={props.name}
                                     onClick={(e) => handleDetalle(props.index,e)}/> 
         <div className="tarjeta-personaje-body">
-            <span>{props.name}</span>
-   
-           
+        <span>{props.name}</span>  
+        {
+            favorito?<>return(<div><BotonFavorito esFavorito={true} onClick={(e:any)=>handleClick(e)}/></div>)</>
+                    :<div>return(<BotonFavorito esFavorito={false} onClick={(e:any)=>handleClick(e)}/>)</div>
+        } 
+        
         </div>
     </div>
-      
-    /*
-     <Link to={{ pathname: '/detalle'}}><img src={arrayPersonajes[props.index].image} alt={props.name}/> </Link>
-    return <div className="tarjeta-personaje">
-        <img src="https://rickandmortyapi.com/api/character/avatar/1.jpeg" alt="Rick Sanchez"/>
-        <div className="tarjeta-personaje-body">
-            <span>Rick Sanchez</span>
-            <BotonFavorito esFavorito={false} />
-        </div>
-    </div>
- <BotonFavorito esFavorito={false} />
-      <p className="linkRegistroOCrearCuenta">
-        ¿Ya tienes una cuenta?
-       
-      </p>
-    */
 }
 
 export default TarjetaPersonaje;

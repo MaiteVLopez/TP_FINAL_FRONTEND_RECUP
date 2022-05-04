@@ -33,21 +33,13 @@ return <div className="grilla-personajes">
                         <TarjetaPersonaje   img={personaje.image}
                                             name ={personaje.name}
                                             index={index}
+                                           
                                             
                          />
                     </div>
                 )
             })}
     </div>
-    
-
-/*
-return <div className="grilla-personajes">
-{
-    <TarjetaPersonaje />
-}
-</div>
-*/
 }
  
 
